@@ -6,7 +6,7 @@
     <title>Add New Product</title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="addProduct" runat="server">
         <div>
             <label for="txtProductID">Product ID:</label>
             <asp:TextBox ID="txtProductID" runat="server"></asp:TextBox><br />
