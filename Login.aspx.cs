@@ -27,15 +27,15 @@ namespace MobileStore
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Users WHERE Username = @Username AND PasswordHash = @PasswordHash", con))
                 {
                     cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Password", password); 
+                    cmd.Parameters.AddWithValue("@PasswordHash", password); 
 
                     int result = (int)cmd.ExecuteScalar();
                     if (result > 0)
                     { 
-                        Response.Redirect("~/Admin.aspx", false);
+                        Response.Redirect("Admin/AdminPage.aspx", false);
                         Context.ApplicationInstance.CompleteRequest();
                     }
                     else

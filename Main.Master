@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="MobileStore.Main" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="CSS_JS/styles.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <form runat="server">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+    </form>
+    <div class="bottom-bar"></div>
+</body>
+</html>

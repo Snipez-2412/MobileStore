@@ -26,7 +26,7 @@ namespace MobileStore
             SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString);
             using (myCon)
             {
-                string query = "SELECT CategoryName FROM Category WHERE CategoryID = @CategoryID";
+                string query = "SELECT CategoryName FROM ProductCategory WHERE CategoryID = @CategoryID";
                 SqlCommand command = new SqlCommand(query, myCon);
                 command.Parameters.AddWithValue("@CategoryID", categoryId);
 
@@ -47,7 +47,7 @@ namespace MobileStore
             SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString);
             using (myCon)
             {
-                string query = "UPDATE Category SET CategoryName = @CategoryName WHERE CategoryID = @CategoryID";
+                string query = "UPDATE ProductCategory SET CategoryName = @CategoryName WHERE CategoryID = @CategoryID";
                 SqlCommand command = new SqlCommand(query, myCon);
                 command.Parameters.AddWithValue("@CategoryID", Request.QueryString["CategoryID"]);
                 command.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
@@ -57,7 +57,7 @@ namespace MobileStore
             }
 
             // Redirect to a confirmation page or back to Category list
-            Response.Redirect("Admin.aspx");
+            Response.Redirect("/Admin/AdminPage.aspx");
         }
     }
 }

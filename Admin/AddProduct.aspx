@@ -1,13 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProduct.aspx.cs" Inherits="MobileStore.AddProduct" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProduct.aspx.cs" Inherits="MobileStore.AddProduct" MasterPageFile="/Main.Master"%>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Add New Product</title>
-</head>
-<body>
-    <form id="addProduct" runat="server">
-        <div>
+
+<asp:Content ID="AddProduct" ContentPlaceHolderID="MainContent" runat="server">
+       <div>
             <label for="txtProductID">Product ID:</label>
             <asp:TextBox ID="txtProductID" runat="server"></asp:TextBox><br />
 
@@ -29,6 +24,4 @@
 
             <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" />
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>

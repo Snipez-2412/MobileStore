@@ -10,25 +10,7 @@
 namespace MobileStore {
     
     
-    public partial class AddCategory {
-        
-        /// <summary>
-        /// addCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm addCategory;
-        
-        /// <summary>
-        /// txtCategoryID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoryID;
+    public partial class UpdateCategory {
         
         /// <summary>
         /// txtCategoryName control.
@@ -40,12 +22,12 @@ namespace MobileStore {
         protected global::System.Web.UI.WebControls.TextBox txtCategoryName;
         
         /// <summary>
-        /// btnAddCategory control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddCategory;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

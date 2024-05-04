@@ -1,13 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="MobileStore.Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminPage.aspx.cs" Inherits="MobileStore.AdminPage" MasterPageFile="/Main.Master" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Admin Page</title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="AdminPage" ContentPlaceHolderID="MainContent" runat="server">
         <div>
             <h2>Product List</h2>
 
@@ -22,7 +15,7 @@
 					<asp:GridView ID="gvCategory" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
                         DataKeyNames="CategoryID"
                         CssClass="table table-striped table-bordered table-condensed" BorderColor="Silver"
-                        OnRowDeleting="gvCategory_RowDeleting"
+                        
                         OnRowCommand="gvCategory_RowCommand"
                         EmptyDataText="No Data.">
                         <Columns>
@@ -45,15 +38,7 @@
                                 <ItemStyle      HorizontalAlign="Left"/>
                             </asp:BoundField>
 
-                            <%-- Delete Category --%>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="lbDelCategory" Text="Del" runat="server"
-                                        OnClientClick="return confirm('Do you want to delete this Category');" CommandName="Delete" />
-                                </ItemTemplate>
-                                <HeaderStyle    HorizontalAlign="Left"/>
-                                <ItemStyle      HorizontalAlign="Center" Width="50px"/>
-                            </asp:TemplateField>
+                            
 
                              <%-- Update Category --%>
                              <asp:TemplateField HeaderText="">
@@ -137,13 +122,33 @@
 
 					</br>
 
-                    <asp:GridView ID="gvUser" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
-                        DataKeyNames="Username"
+                    <asp:GridView ID="gvEmployee" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
+                        DataKeyNames="EmployeeID"
                         CssClass="table table-striped table-bordered table-condensed" BorderColor="Silver"
-                        OnRowDeleting="gvUser_RowDeleting"
-                        OnRowCommand="gvUser_RowCommand"
+                        OnRowDeleting="gvEmployee_RowDeleting"
+                        OnRowCommand="gvEmployee_RowCommand"
                         EmptyDataText="No Data.">
                         <Columns>
+
+                            <asp:BoundField DataField="EmployeeID" HeaderText="Employee ID">
+                                <HeaderStyle    HorizontalAlign="Left"/>
+                                <ItemStyle      HorizontalAlign="Left"/>
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Name" HeaderText="Name">
+                                <HeaderStyle    HorizontalAlign="Left"/>
+                                <ItemStyle      HorizontalAlign="Left"/>
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Position" HeaderText="Position">
+                                <HeaderStyle    HorizontalAlign="Left"/>
+                                <ItemStyle      HorizontalAlign="Left"/>
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Salary" HeaderText="Salary">
+                                <HeaderStyle    HorizontalAlign="Left"/>
+                                <ItemStyle      HorizontalAlign="Left"/>
+                            </asp:BoundField>
 
                             <asp:BoundField DataField="Username" HeaderText="Username">
                                 <HeaderStyle    HorizontalAlign="Left"/>
@@ -171,7 +176,6 @@
 
                         </Columns>
                     </asp:GridView>
-
                 </div>
             </div>
 
@@ -180,8 +184,5 @@
                 <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Logout" CssClass="logout-button" />
             </div>
         </div>
-    </form>
-
-    
-</body>
-</html>
+</asp:Content>
+   

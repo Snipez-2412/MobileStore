@@ -63,7 +63,7 @@ namespace MobileStore
             }
 
             // Redirect to a confirmation page or back to product list
-            Response.Redirect("Admin.aspx");
+            Response.Redirect("/Admin/AdminPage.aspx");
         }
     }
 }

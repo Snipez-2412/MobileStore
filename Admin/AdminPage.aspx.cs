@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace MobileStore
 {
-    public partial class Admin : System.Web.UI.Page
+    public partial class AdminPage : System.Web.UI.Page
     {
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString);
 
@@ -47,13 +47,13 @@ namespace MobileStore
                             productReader.Close();
                         }
 
-                        // Get User from SQL
-                        using (SqlCommand getUser = new SqlCommand("dbo.getAllUsers", myCon))
+                        // Get Employees from SQL
+                        using (SqlCommand getEmployee = new SqlCommand("dbo.getAllEmployees", myCon))
                         {
-                            getUser.CommandType = System.Data.CommandType.StoredProcedure;
-                            SqlDataReader userReader = getUser.ExecuteReader();
-                            gvUser.DataSource = userReader;
-                            gvUser.DataBind();
+                            getEmployee.CommandType = System.Data.CommandType.StoredProcedure;
+                            SqlDataReader userReader = getEmployee.ExecuteReader();
+                            gvEmployee.DataSource = userReader;
+                            gvEmployee.DataBind();
                             userReader.Close();
                         }
                     }
@@ -80,17 +80,17 @@ namespace MobileStore
         // Update Category 
         protected void gvCategory_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "UpdProduct")
+            if (e.CommandName == "Update")
             {
+                // Get the ProductID of the selected row
+                string categoryId = e.CommandArgument.ToString();
 
+                // Redirect to the UpdateProduct.aspx page with the ProductID in the query string
+                Response.Redirect("UpdateCategory.aspx?CategoryID=" + categoryId);
             }
         }
 
-        // Delete Category
-        protected void gvCategory_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
+       
 
         // PRODUCT FUNCTIONS
         // Update Product 
@@ -109,18 +109,12 @@ namespace MobileStore
         // Delete Product
         protected void gvProduct_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            // Get the index of the row being deleted
             int rowIndex = e.RowIndex;
-
-            // Get the ProductID of the item being deleted
             string productId = gvProduct.DataKeys[rowIndex].Value.ToString();
 
             try
             {
-                // Open connection
                 myCon.Open();
-
-                // Create a SQL command to delete the product
                 using (SqlCommand cmd = new SqlCommand("DELETE FROM Product WHERE ProductID = @ProductID", myCon))
                 {
                     // Add parameters
@@ -131,26 +125,22 @@ namespace MobileStore
 
                     // Check if the deletion was successful
                     if (rowsAffected > 0)
-                    {
-                        // Rebind the GridView to reflect the changes
+                    { 
                         BindProductGridView();
                     }
                     else
-                    {
-                        // Handle the case where deletion fails
+                    { 
                         lblMessage.Text = "Failed to delete product.";
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
                 lblMessage.Text = "Error: " + ex.Message;
             }
             finally
             {
-                // Close connection
-                myCon.Close();
+               myCon.Close();
             }
         }
 
@@ -169,19 +159,52 @@ namespace MobileStore
 
 
         // USER FUNCTIONS
-        // Update User 
-        protected void gvUser_RowCommand(object sender, GridViewCommandEventArgs e)
+        // Update Employee 
+        protected void gvEmployee_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "UpdProduct")
+            if (e.CommandName == "Update")
             {
-                
+                // Get the ProductID of the selected row
+                string employeeId = e.CommandArgument.ToString();
+
+                // Redirect to the UpdateProduct.aspx page with the ProductID in the query string
+                Response.Redirect("UpdateEmployee.aspx?EmployeeID=" + employeeId);
             }
         }
 
-        // Delete User
-        protected void gvUser_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        // Delete Employee
+        protected void gvEmployee_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            int rowIndex = e.RowIndex;
+            string employeeId = gvEmployee.DataKeys[rowIndex].Value.ToString();
 
+            try
+            {
+                myCon.Open();
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM Product WHERE EmployeeID = @EmployeeID", myCon))
+                {
+                    cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        BindProductGridView();
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Failed to delete employee.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "Error: " + ex.Message;
+            }
+            finally
+            {
+                myCon.Close();
+            }
         }
 
         // Logout function

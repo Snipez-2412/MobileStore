@@ -1,14 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpdateProduct.aspx.cs" Inherits="MobileStore.UpdateProduct" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpdateProduct.aspx.cs" Inherits="MobileStore.UpdateProduct" MasterPageFile="/Main.Master"%>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Update Product</title>
-</head>
-<body>
-    <form id="updateForm" runat="server">
-        <div>
+<asp:Content ID="UpdateProduct" ContentPlaceHolderID="MainContent" runat="server">
+      <div>
             <label for="txtProductName">Product Name:</label>
             <asp:TextBox ID="txtProductName" runat="server"></asp:TextBox>
         </div>
@@ -27,6 +20,4 @@
         <div>
             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>

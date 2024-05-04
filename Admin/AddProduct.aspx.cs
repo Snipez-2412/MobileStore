@@ -77,7 +77,7 @@ namespace MobileStore
                 if (rowsAffected > 0)
                 {
                     Response.Write("Product added successfully!");
-                    Response.Redirect("Admin.aspx");
+                    Response.Redirect("/Admin/AdminPage.aspx");
                 }
                 else
                 {
