@@ -1,67 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace MobileStore
 {
     public partial class _default : System.Web.UI.Page
     {
-        SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString);
-        
-        // Load Main page
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                try
-                {
-                    myCon.Open();
-                    using (SqlCommand myCom = new SqlCommand("dbo.getProduct", myCon))
-                    {
-                        myCom.Connection = myCon;
-                        myCom.CommandType = System.Data.CommandType.StoredProcedure;
-
-                        SqlDataReader myReader = myCom.ExecuteReader();
-
-                        gvProduct.DataSource = myReader;
-                        gvProduct.DataBind();
-
-                        myReader.Close();
-                    }
-                }
-                catch (Exception ex) { }
-                finally { myCon.Close(); }
+                BindProductData();
             }
         }
 
-        // Update Product 
-        protected void gvProduct_RowCommand(object sender, GridViewCommandEventArgs e) 
+        private void BindProductData()
         {
-            if(e.CommandName == "UpdProduct")
+            string connectionString = ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
+                SqlCommand cmd = new SqlCommand("dbo.getAllProducts", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    rptProducts.DataSource = dt;
+                    rptProducts.DataBind();
+                }
+                else
+                {
+                    lblMessage.Text = "No products found.";
+                }
             }
         }
 
-        // Delete Product
-        protected void gvProduct_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        private DataTable GetProductData()
         {
-         
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ProductID", typeof(int));
+            dt.Columns.Add("ImagePath", typeof(string));
+            dt.Columns.Add("ProductName", typeof(string));
+            dt.Columns.Add("Price", typeof(decimal));
+
+            return dt;
         }
-
-        protected void btnLogout_Click(object sender, EventArgs e)
-        { 
-            System.Web.Security.FormsAuthentication.SignOut();
-
-            Session.Clear();
-
-            Response.Redirect("~/Login.aspx", true);
-        }
-
     }
 }
