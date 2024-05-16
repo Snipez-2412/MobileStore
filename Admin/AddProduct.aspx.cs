@@ -53,15 +53,16 @@ namespace MobileStore
             string productID = txtProductID.Text.Trim();
             string productName = txtProductName.Text.Trim();
             string categoryID = ddlCategory.SelectedValue;
-            decimal price = decimal.Parse(txtPrice.Text.Trim()); // Ensure that your application handles culture-specific decimal formats if needed.
+            decimal price = decimal.Parse(txtPrice.Text.Trim()); 
             string description = txtDescription.Text.Trim();
             int quantity = int.Parse(txtQuantity.Text.Trim());
+            string imagePath = txtImagePath.Text.Trim();
 
             string connectionString = ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString;
             using (SqlConnection myCon = new SqlConnection(connectionString))
             {
-                // Correct the SQL statement to match the columns with the provided parameters
-                string sql = "INSERT INTO Product (ProductID, ProductName, CategoryID, Price, Description, StockQuantity) VALUES (@ProductID, @ProductName, @CategoryID, @Price, @Description, @StockQuantity)";
+          
+                string sql = "INSERT INTO Product (ProductID, ProductName, CategoryID, Price, Description, StockQuantity, ImagePath) VALUES (@ProductID, @ProductName, @CategoryID, @Price, @Description, @StockQuantity, @ImagePath)";
                 SqlCommand cmd = new SqlCommand(sql, myCon);
                 cmd.Parameters.AddWithValue("@ProductID", productID);
                 cmd.Parameters.AddWithValue("@ProductName", productName);
@@ -69,6 +70,7 @@ namespace MobileStore
                 cmd.Parameters.AddWithValue("@Price", price);
                 cmd.Parameters.AddWithValue("@Description", description);
                 cmd.Parameters.AddWithValue("@StockQuantity", quantity);
+                cmd.Parameters.AddWithValue("@ImagePath", imagePath);
 
                 myCon.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();

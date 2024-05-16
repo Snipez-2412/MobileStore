@@ -1,15 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminPage.aspx.cs" Inherits="MobileStore.AdminPage" MasterPageFile="/Main.Master" %>
 
 <asp:Content ID="AdminPage" ContentPlaceHolderID="MainContent" runat="server">
-        <div>
-            <h2>Product List</h2>
+        <div class="container">
 
-
-            <%-- Product Grid View --%>
-            <div class="row" style="margin-top: 20px;">
+            <%-- Categroy Grid View --%>
+            <div class="row justify-content-center" ;">
 
                 <div class="col-sm-8">
-                    <asp:HyperLink ID="hlAddProduct" runat="server" NavigateUrl="~/AddProduct.aspx" Text="Add New Product"></asp:HyperLink>
+                   
                     <asp:Label ID="lblMessage" runat="server" Text="" CssClass="error-message"></asp:Label>
 
 					<asp:GridView ID="gvCategory" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
@@ -19,14 +17,6 @@
                         OnRowCommand="gvCategory_RowCommand"
                         EmptyDataText="No Data.">
                         <Columns>
-
-                            <%--<asp:TemplateField>
-                                <ItemTemplate>
-                                    <%# Container.DataItemIndex + 1 %>
-                                    <HeaderStyle HorizontalAlign="Left" Width="25px"/>
-                                    <ItemStyle HorizontalAlign="Right" Font-Bold="true"/>
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
 
                            <asp:BoundField DataField="CategoryID" HeaderText="Category ID">
                                 <HeaderStyle    HorizontalAlign="Left"/>
@@ -54,6 +44,8 @@
 
 					</br>
 
+                    <%-- Product Grid View --%>
+                    <asp:HyperLink ID="hlAddProduct" runat="server" NavigateUrl="/Admin/AddProduct.aspx" Text="Add New Product"></asp:HyperLink>
                     <asp:GridView ID="gvProduct" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
                         DataKeyNames="ProductID"
                         CssClass="table table-striped table-bordered table-condensed" BorderColor="Silver"
@@ -62,16 +54,16 @@
                         EmptyDataText="No Data.">
                         <Columns>
 
-                           <%-- <asp:TemplateField HeaderText="image">
-                                <ItemTemplate>
-                                    <asp:Image ID="img" runat="server" Width="100px" Height="100px" imageurl='<%#  "~/Images/"+Eval("img") %>'/>
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
-
                             <asp:BoundField DataField="ProductID" HeaderText="Product ID">
                                 <HeaderStyle    HorizontalAlign="Left"/>
                                 <ItemStyle      HorizontalAlign="Left"/>
                             </asp:BoundField>
+
+                            <asp:TemplateField HeaderText="image">
+                                <ItemTemplate>
+                                    <asp:Image ID="ImagePath" runat="server" Width="100px" Height="100px" imageurl='<%#  "~/Images/"+Eval("ImagePath") %>'/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
                             <asp:BoundField DataField="ProductName" HeaderText="Product Name">
                                 <HeaderStyle    HorizontalAlign="Left"/>
@@ -122,6 +114,7 @@
 
 					</br>
 
+                    <%-- Employee Grid View --%>
                     <asp:GridView ID="gvEmployee" runat="server" AutoGenerateColumns="False" AllowSorting="True" 
                         DataKeyNames="EmployeeID"
                         CssClass="table table-striped table-bordered table-condensed" BorderColor="Silver"

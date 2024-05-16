@@ -14,17 +14,14 @@ namespace MobileStore
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["MobileStore"].ConnectionString);
 
         // Load Main page
-        // Load Main page
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 try
                 {
-                    // Open connection
                     myCon.Open();
 
-                    // Check if the connection was successful
                     if (myCon.State == System.Data.ConnectionState.Open)
                     {
                         // Get Category from SQL
